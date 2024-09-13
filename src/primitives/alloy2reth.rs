@@ -133,7 +133,7 @@ impl IntoReth<RethHeader> for AlloyHeader {
             withdrawals_root: self.withdrawals_root,
             logs_bloom: self.logs_bloom.0.into(),
             difficulty: self.difficulty,
-            number: self.number.unwrap(),
+            number: self.number,
             gas_limit: self.gas_limit.try_into().unwrap(),
             gas_used: self.gas_used.try_into().unwrap(),
             timestamp: self.timestamp,
@@ -144,6 +144,7 @@ impl IntoReth<RethHeader> for AlloyHeader {
             blob_gas_used: self.blob_gas_used.map(|x| x.try_into().unwrap()),
             excess_blob_gas: self.excess_blob_gas.map(|x| x.try_into().unwrap()),
             parent_beacon_block_root: self.parent_beacon_block_root,
+            requests_root: self.requests_root,
         }
     }
 }
