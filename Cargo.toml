@@ -13,7 +13,7 @@ zstd-sys = { git = "https://github.com/lita-xyz/zstd-rs.git", branch = "zstd-sys
 [dependencies]
 entrypoint = { path = "../entrypoint" }
 revm = { version = "14.0.0", features = ["std"], default-features = false }
-reth-primitives = { path = "../reth/crates/primitives", default-features = false }
+reth-primitives = { git = "https://github.com/lita-xyz/reth.git", branch = "1.0.6-delendum" }
 alloy-rlp = { version = "0.3", default-features = false }
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "1.0"
