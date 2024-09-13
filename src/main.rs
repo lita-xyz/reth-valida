@@ -1,6 +1,6 @@
 #![no_main]
 
-use crate::primitives::mpt;
+use reth_valida::primitives::mpt;
 
 entrypoint::entrypoint!(main);
 

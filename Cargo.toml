@@ -19,7 +19,7 @@ alloy-rlp-derive = { version = "0.3", default-features = false }
 alloy-rpc-types = { git = "https://github.com/alloy-rs/alloy" }
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "1.0"
-alloy-primitives = { version = "0.6.0", default-features = false, features = [
+alloy-primitives = { version = "=0.8.3", default-features = false, features = [
     "rlp",
     "serde",
     "std",
