@@ -15,6 +15,8 @@ entrypoint = { path = "../entrypoint" }
 revm = { version = "14.0.0", features = ["std"], default-features = false }
 reth-primitives = { git = "https://github.com/lita-xyz/reth.git", branch = "1.0.6-delendum" }
 alloy-rlp = { version = "0.3", default-features = false }
+alloy-rlp-derive = { version = "0.3", default-features = false }
+alloy-rpc-types = { git = "https://github.com/alloy-rs/alloy" }
 serde = { version = "1.0", features = ["derive"] }
 thiserror = "1.0"
 alloy-primitives = { version = "0.6.0", default-features = false, features = [
@@ -23,6 +25,7 @@ alloy-primitives = { version = "0.6.0", default-features = false, features = [
     "std",
     "tiny-keccak"
 ] }
+rlp = "0.5.2"
 anyhow = "1.0.75"
 hashbrown = "0.14.3"
 hex = "0.4.3"
