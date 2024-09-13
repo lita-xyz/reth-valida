@@ -41,8 +41,8 @@ impl IntoReth<RethTransaction> for AlloyTransaction {
                 gas_price: self.gas_price.unwrap(),
                 gas_limit: self.gas.try_into().unwrap(),
                 to: match self.to {
-                    None => reth_primitives::TransactionKind::Create,
-                    Some(to) => reth_primitives::TransactionKind::Call(to),
+                    None => reth_primitives::TxKind::Create,
+                    Some(to) => reth_primitives::TxKind::Call(to),
                 },
                 value: self.value,
                 input: self.input,
@@ -53,8 +53,8 @@ impl IntoReth<RethTransaction> for AlloyTransaction {
                 gas_price: self.gas_price.unwrap(),
                 gas_limit: self.gas.try_into().unwrap(),
                 to: match self.to {
-                    None => reth_primitives::TransactionKind::Create,
-                    Some(to) => reth_primitives::TransactionKind::Call(to),
+                    None => reth_primitives::TxKind::Create,
+                    Some(to) => reth_primitives::TxKind::Call(to),
                 },
                 value: self.value,
                 input: self.input,
@@ -73,8 +73,8 @@ impl IntoReth<RethTransaction> for AlloyTransaction {
                 max_priority_fee_per_gas: self.max_priority_fee_per_gas.unwrap(),
                 gas_limit: self.gas.try_into().unwrap(),
                 to: match self.to {
-                    None => reth_primitives::TransactionKind::Create,
-                    Some(to) => reth_primitives::TransactionKind::Call(to),
+                    None => reth_primitives::TxKind::Create,
+                    Some(to) => reth_primitives::TxKind::Call(to),
                 },
                 value: self.value,
                 input: self.input,
