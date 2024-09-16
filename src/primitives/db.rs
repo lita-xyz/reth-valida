@@ -18,10 +18,8 @@
 
 use std::collections::hash_map::Entry;
 
-use mpt::keccak;
-use mpt::StateAccount;
-use mpt::KECCAK_EMPTY;
-use SP1RethInput;
+use crate::primitives::mpt::{keccak, StateAccount, KECCAK_EMPTY};
+use crate::primitives::SP1RethInput;
 
 use anyhow::{anyhow, Result};
 // use hashbrown::hash_map::Entry;
