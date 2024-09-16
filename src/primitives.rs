@@ -1,6 +1,7 @@
 pub mod alloy2reth;
 pub mod db;
 pub mod mpt;
+pub mod processor;
 
 use crate::primitives::mpt::MptNode;
 use crate::primitives::mpt::StorageEntry;
