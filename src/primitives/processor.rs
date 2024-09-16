@@ -17,7 +17,7 @@
 // limitations under the License.
 
 use crate::primitives::mpt::{keccak, RlpBytes, StateAccount};
-use crate::primitives::SP1RethInput;
+use crate::primitives::ValidaRethInput;
 
 use anyhow::anyhow;
 use reth_primitives::bytes::BufMut;
@@ -53,7 +53,7 @@ pub const MAXIMUM_EXTRA_DATA_SIZE: usize = 32;
 /// A processor that executes EVM transactions.
 pub struct EvmProcessor<D> {
     /// An input containing all necessary data to execute the block.
-    pub input: SP1RethInput,
+    pub input: ValidaRethInput,
 
     /// A database to store all state changes.
     pub db: Option<D>,

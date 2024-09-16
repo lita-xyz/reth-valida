@@ -19,7 +19,7 @@
 use std::collections::hash_map::Entry;
 
 use crate::primitives::mpt::{keccak, StateAccount, KECCAK_EMPTY};
-use crate::primitives::SP1RethInput;
+use crate::primitives::ValidaRethInput;
 
 use anyhow::{anyhow, Result};
 // use hashbrown::hash_map::Entry;
@@ -33,8 +33,8 @@ use revm::primitives::HashMap;
 
 /// A helper trait to extend [InMemoryDB] with additional functionality.
 pub trait InMemoryDBHelper {
-    /// Create an [InMemoryDB] from a given [SP1RethInput].
-    fn initialize(input: &mut SP1RethInput) -> Result<Self>
+    /// Create an [InMemoryDB] from a given [ValidaRethInput].
+    fn initialize(input: &mut ValidaRethInput) -> Result<Self>
     where
         Self: Sized;
 
@@ -52,7 +52,7 @@ pub trait InMemoryDBHelper {
 }
 
 impl InMemoryDBHelper for InMemoryDB {
-    fn initialize(input: &mut SP1RethInput) -> Result<Self> {
+    fn initialize(input: &mut ValidaRethInput) -> Result<Self> {
         // For each contract's byte code, hash it and store it in a map.
         let contracts: HashMap<B256, Bytes> = input
             .contracts

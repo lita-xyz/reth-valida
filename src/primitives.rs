@@ -10,9 +10,9 @@ use reth_primitives::{Address, Bytes, Header, TransactionSignedNoHash, Withdrawa
 use revm::primitives::HashMap;
 use serde::{Deserialize, Serialize};
 
-/// Necessary information to prove the execution of Ethereum blocks inside SP1.
+/// Necessary information to prove the execution of Ethereum blocks inside Valida.
 #[derive(Clone, Serialize, Deserialize)]
-pub struct SP1RethInput {
+pub struct ValidaRethInput {
     /// The Keccak 256-bit hash of the parent block's header, in its entirety.
     pub parent_header: Header,
 
