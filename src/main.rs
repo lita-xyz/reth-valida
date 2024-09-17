@@ -1,6 +1,5 @@
 #![no_main]
 
-use reth_valida::primitives::mpt;
 use reth_primitives::B256;
 use revm::InMemoryDB;
 use reth_valida::primitives::db::InMemoryDBHelper;
@@ -28,4 +27,5 @@ pub fn main() {
 
     // Print the resulting block hash.
     let hash = B256::from(keccak(alloy_rlp::encode(executor.header.unwrap())));
+    entrypoint::io::write(&hash).unwrap();
 }
