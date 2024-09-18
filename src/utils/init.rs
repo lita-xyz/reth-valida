@@ -16,15 +16,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-use crate::db::RemoteDb;
+use crate::utils::db::RemoteDb;
+use alloy_primitives::Bytes;
 use alloy_provider::{Provider, ProviderBuilder};
 use alloy_rpc_types::BlockTransactions;
 use anyhow::Result;
 use async_trait::async_trait;
-use reth_primitives::alloy2reth::IntoReth;
-use reth_primitives::mpt::proofs_to_tries;
-use reth_primitives::processor::EvmProcessor;
-use reth_primitives::ValidaRethInput;
+use crate::primitives::alloy2reth::IntoReth;
+use crate::primitives::mpt::proofs_to_tries;
+use crate::primitives::processor::EvmProcessor;
+use crate::primitives::ValidaRethInput;
 use std::collections::HashSet;
 use url::Url;
 
@@ -54,7 +55,7 @@ impl ValidaRethInputInitializer for ValidaRethInput {
             .unwrap();
 
         // Intiialize the db.
-        let provider_db = RemoteDb::new(provider, parent_header.number.unwrap());
+        let provider_db = RemoteDb::new(provider, parent_header.number);
 
         // Create the input.
         let txs = match block.transactions {
@@ -111,7 +112,7 @@ impl ValidaRethInputInitializer for ValidaRethInput {
         for account in initial_db.accounts.values() {
             let code = &account.info.code;
             if let Some(code) = code {
-                contracts.insert(code.bytecode.clone());
+                contracts.insert(code.clone());
             }
         }
 
@@ -123,7 +124,7 @@ impl ValidaRethInputInitializer for ValidaRethInput {
         let input = ValidaRethInput {
             parent_state_trie: state_trie,
             parent_storage: storage,
-            contracts: contracts.iter().cloned().collect(),
+            contracts: contracts.iter().map(|code| Bytes::from(code.bytecode().to_vec())).collect(),
             ancestor_headers,
             ..input
         };
