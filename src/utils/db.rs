@@ -29,7 +29,7 @@ use revm::primitives::HashMap;
 use revm::DatabaseCommit;
 use crate::primitives::db::InMemoryDBHelper;
 use tokio::runtime::Handle;
-
+use alloy_rpc_types::BlockTransactionsKind;
 /// A database that fetches data from a [HttpProvider].
 pub struct RemoteDb {
     /// The provider to fetch data from.
@@ -71,7 +71,7 @@ impl RemoteDb {
             let indices = keys.into_iter().map(|x| x.to_be_bytes().into()).collect();
             let proof = self.async_executor.block_on(async {
                 self.provider
-                    .get_proof(address, indices, BlockId::from(block_number))
+                    .get_proof(address, indices)
                     .await
             })?;
             storage_proofs.insert(address, proof);
@@ -94,7 +94,7 @@ impl RemoteDb {
                 self.async_executor.block_on(async {
                     let header = self
                         .provider
-                        .get_block(block_number.into(), false)
+                        .get_block(block_number.into(), BlockTransactionsKind::Hashes)
                         .await
                         .unwrap()
                         .unwrap()
@@ -109,7 +109,7 @@ impl RemoteDb {
                         withdrawals_root: header.withdrawals_root,
                         logs_bloom: header.logs_bloom.0.into(),
                         difficulty: header.difficulty,
-                        number: header.number.unwrap(),
+                        number: header.number,
                         gas_limit: header.gas_limit.try_into().unwrap(),
                         gas_used: header.gas_used.try_into().unwrap(),
                         timestamp: header.timestamp,
@@ -122,6 +122,7 @@ impl RemoteDb {
                         blob_gas_used: Some(header.blob_gas_used.unwrap().try_into().unwrap()),
                         excess_blob_gas: Some(header.excess_blob_gas.unwrap().try_into().unwrap()),
                         parent_beacon_block_root: header.parent_beacon_block_root,
+                        requests_root: Default::default(),
                     }
                 })
             })
@@ -168,17 +169,17 @@ impl Database for RemoteDb {
         // Get the nonce, balance, and code to reconstruct the account.
         let nonce = self.async_executor.block_on(async {
             self.provider
-                .get_transaction_count(address, BlockId::from(self.block_number))
+                .get_transaction_count(address)
                 .await
         })?;
         let balance = self.async_executor.block_on(async {
             self.provider
-                .get_balance(address, BlockId::from(self.block_number))
+                .get_balance(address)
                 .await
         })?;
         let code = self.async_executor.block_on(async {
             self.provider
-                .get_code_at(address, BlockId::from(self.block_number))
+                .get_code_at(address)
                 .await
         })?;
 
@@ -210,7 +211,6 @@ impl Database for RemoteDb {
                 .get_storage_at(
                     address.into_array().into(),
                     index,
-                    BlockId::from(self.block_number),
                 )
                 .await
         })?;
@@ -219,7 +219,7 @@ impl Database for RemoteDb {
         Ok(storage)
     }
 
-    fn block_hash(&mut self, number: U256) -> Result<B256, Self::Error> {
+    fn block_hash(&mut self, number: u64) -> Result<B256, Self::Error> {
         // Check if the block hash is in the current database.
         if let Ok(block_hash) = self.initial_db.block_hash(number) {
             return Ok(block_hash);
@@ -235,7 +235,6 @@ impl Database for RemoteDb {
                 .unwrap()
                 .header
                 .hash
-                .unwrap()
                 .0
                 .into()
         });
