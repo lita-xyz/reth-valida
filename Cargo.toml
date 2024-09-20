@@ -11,7 +11,7 @@ c-kzg = { git = "https://github.com/lita-xyz/c-kzg-4844.git", branch = "1.0.3-de
 zstd-sys = { git = "https://github.com/lita-xyz/zstd-rs.git", branch = "zstd-sys-2.0.13-delendum" }
 
 [dependencies]
-entrypoint = { path = "../valida-rs" }
+entrypoint = { git = "https://github.com/lita-xyz/valida-rs.git", branch = "main" }
 revm = { version = "14.0.0", features = ["std"], default-features = false }
 reth-primitives = { git = "https://github.com/lita-xyz/reth.git", branch = "1.0.6-delendum" }
 reth-chainspec = { git = "https://github.com/lita-xyz/reth.git", branch = "1.0.6-delendum" }
