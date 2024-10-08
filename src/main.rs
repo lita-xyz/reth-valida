@@ -7,6 +7,7 @@ use reth_valida::primitives::ValidaRethInput;
 entrypoint::entrypoint!(main);
 
 pub fn main() {
-    let mut input = entrypoint::io::read::<ValidaRethInput>().unwrap();
-
+    println!("reading input");
+    let mut input = entrypoint::io::read_n(1).unwrap();
+    println!("read input: {:?}", input);
 }

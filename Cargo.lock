@@ -1004,7 +1004,7 @@ dependencies = [
 [[package]]
 name = "entrypoint"
 version = "0.1.0"
-source = "git+https://github.com/lita-xyz/valida-rs.git?branch=main#ac66a9be95ed24fef7a3c3da72e5a17fbc3c7bef"
+source = "git+https://github.com/lita-xyz/valida-rs.git?branch=thealmarty-debug#da483724c7114c67340a8e9e83f77ab3b83bd362"
 dependencies = [
  "bincode",
  "getrandom",
