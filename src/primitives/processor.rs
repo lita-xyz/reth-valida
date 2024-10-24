@@ -22,7 +22,6 @@ use crate::primitives::ValidaRethInput;
 use anyhow::anyhow;
 use reth_primitives::bytes::BufMut;
 use reth_trie_common::root::ordered_trie_root_with_encoder;
-use reth_primitives::revm_primitives::Account;
 use reth_primitives::{AccessListItem, Address, Bloom, Transaction, TxKind, TransactionSigned};
 use reth_primitives::{Receipt, ReceiptWithBloom};
 use reth_primitives::{Header, U256};
@@ -30,7 +29,7 @@ use reth_chainspec::BaseFeeParams;
 use revm::db::AccountState;
 use revm::db::InMemoryDB;
 use revm::interpreter::Host;
-use revm::primitives::{SpecId, TransactTo, TxEnv};
+use revm::primitives::{Account, AccountInfo, SpecId, TransactTo, TxEnv};
 use revm::{Database, DatabaseCommit, Evm};
 use std::mem;
 use std::mem::take;
@@ -407,7 +406,7 @@ where
     <D as Database>::Error: core::fmt::Debug,
 {
     // Read account from database
-    let mut account: Account = db
+    let mut account: revm::primitives::Account = db
         .basic(address)
         .map_err(|db_err| {
             anyhow!(
