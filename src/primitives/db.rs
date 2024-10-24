@@ -23,13 +23,12 @@ use crate::primitives::ValidaRethInput;
 
 use anyhow::{anyhow, Result};
 // use hashbrown::hash_map::Entry;
-use reth_primitives::revm_primitives::{AccountInfo, Bytecode};
 use reth_primitives::Bytes;
 use reth_primitives::{Address, B256, U256};
 use revm::db::AccountState;
 use revm::db::DbAccount;
 use revm::db::InMemoryDB;
-use revm::primitives::HashMap;
+use revm::primitives::{AccountInfo, Bytecode, HashMap};
 
 /// A helper trait to extend [InMemoryDB] with additional functionality.
 pub trait InMemoryDBHelper {

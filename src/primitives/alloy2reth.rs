@@ -160,7 +160,7 @@ impl IntoReth<RethHeader> for AlloyHeader {
             blob_gas_used: self.blob_gas_used.map(|x| x.try_into().unwrap()),
             excess_blob_gas: self.excess_blob_gas.map(|x| x.try_into().unwrap()),
             parent_beacon_block_root: self.parent_beacon_block_root,
-            requests_root: self.requests_root,
+            requests_root: self.requests_hash,
         }
     }
 }
