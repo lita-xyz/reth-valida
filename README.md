@@ -8,13 +8,13 @@ To compile this to run on the Valida zkVM, make sure you have the [Valida Compil
 After the Valida compiler is successfully installed, run the following command in the `reth-valida` directory:
 
 ```bash
-CC_delendum_unknown_baremetal_gnu=/valida-toolchain/bin/clang CFLAGS_delendum_unknown_baremetal_gnu="--sysroot=/valida-toolchain/ -isystem /valida-toolchain/include" RUSTFLAGS="-C linker=/valida-toolchain/bin/ld.lld -C link-args=/valida-toolchain/DelendumEntryPoint.o -C link-args=--script=/valida-toolchain/valida.ld -C link-args=/valida-toolchain/lib/delendum-unknown-baremetal-gnu/libc.a -C link-args=/valida-toolchain/lib/delendum-unknown-baremetal-gnu/libm.a -C link-args=--noinhibit-exec" cargo +delendum build --target=delendum-unknown-baremetal-gnu --verbose
+cargo +valida build --release
 ```
 
 If you get the following error:
 
 ```bash
-error: toolchain 'delendum' is not installable
+error: toolchain 'valida' is not installable
 ```
 
 Run [this script](https://github.com/lita-xyz/valida-toolchain/blob/main/install-rust) from the Valida repo to add the Valida compiler to `rustc`.
