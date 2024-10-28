@@ -10,10 +10,10 @@ use reth_valida::primitives::ValidaRethInput;
 entrypoint::entrypoint!(main);
 
 pub fn main() {
-    let mut input = match entrypoint::io::read::<ValidaRethInput>() {
+    let mut input = match entrypoint::io::read_and_deserialize::<ValidaRethInput>() {
         Ok(val) => val,
         Err(e) => {
-            entrypoint::io::println(&format!("Error reading input: {}", e));
+            entrypoint::io::println(&format!("Error reading/deserializing input: {}", e));
             return;
         }
     };
