@@ -141,8 +141,8 @@ impl IntoReth<RethHeader> for AlloyHeader {
     fn into_reth(self) -> RethHeader {
         RethHeader {
             parent_hash: self.parent_hash.0.into(),
-            ommers_hash: self.uncles_hash.0.into(),
-            beneficiary: self.miner.0.into(),
+            ommers_hash: self.ommers_hash.0.into(),
+            beneficiary: self.beneficiary.0.into(),
             state_root: self.state_root.0.into(),
             transactions_root: self.transactions_root.0.into(),
             receipts_root: self.receipts_root.0.into(),
@@ -153,9 +153,9 @@ impl IntoReth<RethHeader> for AlloyHeader {
             gas_limit: self.gas_limit.try_into().unwrap(),
             gas_used: self.gas_used.try_into().unwrap(),
             timestamp: self.timestamp,
-            extra_data: self.extra_data.0.into(),
-            mix_hash: self.mix_hash.unwrap(),
-            nonce: u64::from_be_bytes(self.nonce.unwrap().0),
+            extra_data: self.extra_data.0.clone().into(),
+            mix_hash: self.mix_hash,
+            nonce: u64::from_be_bytes(self.nonce.0),
             base_fee_per_gas: Some(self.base_fee_per_gas.unwrap().try_into().unwrap()),
             blob_gas_used: self.blob_gas_used.map(|x| x.try_into().unwrap()),
             excess_blob_gas: self.excess_blob_gas.map(|x| x.try_into().unwrap()),
