@@ -29,7 +29,7 @@ use reth_chainspec::BaseFeeParams;
 use revm::db::AccountState;
 use revm::db::InMemoryDB;
 use revm::interpreter::Host;
-use revm::primitives::{Account, AccountInfo, SpecId, TransactTo, TxEnv};
+use revm::primitives::{SpecId, TransactTo, TxEnv};
 use revm::{Database, DatabaseCommit, Evm};
 use std::mem;
 use std::mem::take;
