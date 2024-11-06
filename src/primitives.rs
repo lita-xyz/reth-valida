@@ -6,7 +6,9 @@ pub mod processor;
 use crate::primitives::mpt::MptNode;
 use crate::primitives::mpt::StorageEntry;
 
-use reth_primitives::{Address, Bytes, Header, TransactionSignedNoHash, Withdrawal, B256};
+use alloy_primitives::{Address, Bytes, B256};
+use alloy_rpc_types::Withdrawal;
+use reth_primitives::{Header, TransactionSignedNoHash};
 use revm::primitives::HashMap;
 use serde::{Deserialize, Serialize};
 

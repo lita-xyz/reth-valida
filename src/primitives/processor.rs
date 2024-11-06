@@ -19,12 +19,15 @@
 use crate::primitives::mpt::{keccak, RlpBytes, StateAccount};
 use crate::primitives::ValidaRethInput;
 
+use alloy_primitives::{Address, Bloom, TxKind, U256};
+use alloy_consensus::Transaction as AlloyTransactionTrait;
+use alloy_rlp::BufMut;
+use alloy_rpc_types::AccessListItem;
 use anyhow::anyhow;
-use reth_primitives::bytes::BufMut;
 use reth_trie_common::root::ordered_trie_root_with_encoder;
-use reth_primitives::{AccessListItem, Address, Bloom, Transaction, TxKind, TransactionSigned};
+use reth_primitives::{Transaction, TransactionSigned};
 use reth_primitives::{Receipt, ReceiptWithBloom};
-use reth_primitives::{Header, U256};
+use reth_primitives::Header;
 use reth_chainspec::BaseFeeParams;
 use revm::db::AccountState;
 use revm::db::InMemoryDB;

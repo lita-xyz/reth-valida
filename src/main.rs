@@ -1,6 +1,6 @@
 #![no_main]
 
-use reth_primitives::B256;
+use alloy_primitives::B256;
 use revm::InMemoryDB;
 use reth_valida::primitives::db::InMemoryDBHelper;
 use reth_valida::primitives::mpt::keccak;
