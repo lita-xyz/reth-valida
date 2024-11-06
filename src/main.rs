@@ -10,13 +10,22 @@ use reth_valida::primitives::ValidaRethInput;
 valida_rs::entrypoint!(main);
 
 pub fn main() {
-    let mut input = match valida_rs::io::read_and_deserialize::<ValidaRethInput>() {
-        Ok(val) => val,
+    let vec = match valida_rs::io::read() {
+        Ok(vec) => vec,
         Err(e) => {
-            valida_rs::io::println(&format!("Error reading/deserializing input: {}", e));
+            valida_rs::io::println(&format!("Error reading input: {}", e));
             return;
         }
     };
+
+    let mut input = match serde_json::de::from_slice::<ValidaRethInput>(&vec.as_slice()) {
+        Ok(val) => val,
+        Err(e) => {
+            valida_rs::io::println(&format!("Error deserializing input: {}", e));
+            return;
+        }
+    };
+
     // Initialize the database.
     let db = match InMemoryDB::initialize(&mut input) {
         Ok(val) => val,

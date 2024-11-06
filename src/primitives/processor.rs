@@ -319,8 +319,6 @@ impl EvmProcessor<InMemoryDB> {
         // Update state trie root in header.
         let header = self.header.as_mut().expect("Header not initialized");
         header.state_root = state_trie.hash();
-
-        println!("{:?}", header);
     }
 }
 
