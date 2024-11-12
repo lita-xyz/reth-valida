@@ -22,10 +22,10 @@ error: toolchain 'valida' is not installable
 Run [this script](https://github.com/lita-xyz/valida-toolchain/blob/main/install-rust) from the Valida repo to add the Valida compiler to `rustc`.
 
 ## Proving a block
-After successful compilation, the binary will be in `target/delendum-unknown-baremetal-gnu/release/reth-valida`. One can prove a block by running the binary in Valida, with the block data input `input.bin` (obtained from running `prepare_block`, more details to follow). To do this, run this command in the `valida-toolchain` directory:
+After successful compilation, the binary will be in `target/valida-unknown-baremetal-gnu/release/reth-valida`. One can prove a block by running the binary in Valida, with the block data input `input.bin` (obtained from running `prepare_block`, more details to follow). To do this, run this command in the `valida-toolchain` directory:
 
 ```bash
-./valida/target/release/valida run ../reth-valida/target/delendum-unknown-baremetal-gnu/release/reth-valida log ../prepare_block/input.bin
+./valida/target/release/valida run ../reth-valida/target/valida-unknown-baremetal-gnu/release/reth-valida log ../prepare_block/input.bin
 ```
 
 Alternatively, run the built binary in a `valida-shell` with the block data input file:

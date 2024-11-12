@@ -710,7 +710,7 @@ dependencies = [
 [[package]]
 name = "cc"
 version = "1.1.18"
-source = "git+https://github.com/lita-xyz/cc-rs.git?branch=1.1.18-delendum#68944dd2c8f23c4b6ce24c88185aacee29670347"
+source = "git+https://github.com/lita-xyz/cc-rs.git?branch=1.1.18-delendum#92233fca5ad8f2430270032e1599b292d6e9d112"
 dependencies = [
  "jobserver",
  "libc",
@@ -1808,7 +1808,7 @@ dependencies = [
 [[package]]
 name = "radium"
 version = "0.7.0"
-source = "git+https://github.com/lita-xyz/ferrilab.git?branch=radium-0.7.0-delendum#42c671e4059e18ffb3bc50dcafb38aaa5ff09283"
+source = "git+https://github.com/lita-xyz/ferrilab.git?branch=radium-0.7.0-delendum#47a1671030e71d7640f18bee4146c6902dac6532"
 
 [[package]]
 name = "rand"
@@ -2835,7 +2835,7 @@ dependencies = [
 [[package]]
 name = "valida-rs"
 version = "0.1.0"
-source = "git+https://github.com/lita-xyz/valida-rs.git?branch=main#84df845d672aa72f7aa0d591caa3e5201dac2b75"
+source = "git+https://github.com/lita-xyz/valida-rs.git?branch=main#66868f53635b4a1a5d962a5eec7473cdcc41ae38"
 dependencies = [
  "bincode",
  "getrandom",
