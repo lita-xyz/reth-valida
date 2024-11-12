@@ -33,12 +33,11 @@ use rlp::{Decodable, DecoderError, Prototype, Rlp};
 use serde::{Deserialize, Serialize};
 use thiserror::Error as ThisError;
 
-use alloy_primitives::{TxNumber, U256};
+use alloy_primitives::{Address, TxNumber, U256};
 use alloy_rlp_derive::{RlpDecodable, RlpEncodable, RlpMaxEncodedLen};
 use alloy_rpc_types::EIP1186AccountProofResponse;
 use anyhow::Context;
 use anyhow::Result;
-use reth_primitives::Address;
 
 pub type StorageEntry = (MptNode, Vec<U256>);
 
