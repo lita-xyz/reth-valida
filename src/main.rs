@@ -1,6 +1,6 @@
 #![no_main]
 
-use reth_primitives::B256;
+use alloy_primitives::B256;
 use revm::InMemoryDB;
 use reth_valida::primitives::db::InMemoryDBHelper;
 use reth_valida::primitives::mpt::keccak;
@@ -10,13 +10,22 @@ use reth_valida::primitives::ValidaRethInput;
 valida_rs::entrypoint!(main);
 
 pub fn main() {
-    let mut input = match valida_rs::io::read_and_deserialize::<ValidaRethInput>() {
+    let vec = match valida_rs::io::read() {
+        Ok(vec) => vec,
+        Err(e) => {
+            valida_rs::io::println(&format!("Error reading input: {}", e));
+            return;
+        }
+    };
+
+    let mut input = match serde_json::de::from_slice::<ValidaRethInput>(&vec.as_slice()) {
         Ok(val) => val,
         Err(e) => {
             println!("Error reading/deserializing input: {}", e);
             return;
         }
     };
+
     // Initialize the database.
     let db = match InMemoryDB::initialize(&mut input) {
         Ok(val) => val,
