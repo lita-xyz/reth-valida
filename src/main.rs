@@ -21,7 +21,7 @@ pub fn main() {
     let mut input = match serde_json::de::from_slice::<ValidaRethInput>(&vec.as_slice()) {
         Ok(val) => val,
         Err(e) => {
-            valida_rs::io::println(&format!("Error deserializing input: {}", e));
+            println!("Error reading/deserializing input: {}", e);
             return;
         }
     };
@@ -30,7 +30,7 @@ pub fn main() {
     let db = match InMemoryDB::initialize(&mut input) {
         Ok(val) => val,
         Err(e) => {
-            valida_rs::io::println(&format!("Error initializing database: {}", e));
+            println!("Error initializing database: {}", e);
             return;
         }
     };
@@ -49,12 +49,12 @@ pub fn main() {
     let header = match executor.header {
         Some(val) => val,
         None => {
-            valida_rs::io::println("Error: executor header is None");
+            println!("Error: executor header is None");
             return;
         }
     };
     let hash = B256::from(keccak(alloy_rlp::encode(header)));
     if let Err(e) = valida_rs::io::write(&hash) {
-        valida_rs::io::println(&format!("Error writing hash: {}", e));
+        println!("Error writing hash: {}", e);
     }
 }
