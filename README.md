@@ -21,6 +21,13 @@ error: toolchain 'valida' is not installable
 
 Run [this script](https://github.com/lita-xyz/valida-toolchain/blob/main/install-rust) from the Valida repo to add the Valida compiler to `rustc`.
 
+### LTO optimized build
+To provide a Valida binary that runs/proves slightly faster you might want to use LTO (Link Time Optimization). To do this, you will need to modify the build command as follows:
+
+```bash
+CFLAGS_valida_unknown_baremetal_gnu="-O3 -flto" LDFLAGS_valida_unknown_baremetal_gnu="-O3 -flto" RUSTFLAGS="-C linker-plugin-lto -C linker=clang -C link-arg=-fuse-ld=lld -C link-arg=-O3 -C link-arg=-flto -C link-arg=--target=valida-unknown-baremetal-gnu -C link-arg=-Wl,-O3" cargo +valida build --release
+```
+
 ## Proving a block
 After successful compilation, the binary will be in `target/valida-unknown-baremetal-gnu/release/reth-valida`. One can prove a block by running the binary in Valida, with the block data input `input.bin` (obtained from running `prepare_block`, more details to follow). To do this, run this command in the `valida-toolchain` directory:
 
