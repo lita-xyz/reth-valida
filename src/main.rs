@@ -54,6 +54,7 @@ pub fn main() {
         }
     };
     let hash = B256::from(keccak(alloy_rlp::encode(header)));
+    println!("{}", hash);
     if let Err(e) = valida_rs::io::write(&hash) {
         println!("Error writing hash: {}", e);
     }
