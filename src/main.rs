@@ -13,7 +13,7 @@ pub fn main() {
     let vec = match valida_rs::io::read() {
         Ok(vec) => vec,
         Err(e) => {
-            valida_rs::io::println(&format!("Error reading input: {}", e));
+            println!("Error reading input: {}", e);
             return;
         }
     };

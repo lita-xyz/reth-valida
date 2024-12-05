@@ -1019,6 +1019,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "filedescriptor"
+version = "0.8.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7199d965852c3bac31f779ef99cbb4537f80e952e2d6aa0ffeb30cce00f4f46e"
+dependencies = [
+ "libc",
+ "thiserror",
+ "winapi",
+]
+
+[[package]]
 name = "fixed-hash"
 version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -1056,6 +1067,16 @@ name = "funty"
 version = "2.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "e6d5a32815ae3f33302d95fdcb2ce17862f8c65363dcfd29360480ba1001fc9c"
+
+[[package]]
+name = "gag"
+version = "1.0.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a713bee13966e9fbffdf7193af71d54a6b35a0bb34997cd6c9519ebeb5005972"
+dependencies = [
+ "filedescriptor",
+ "tempfile",
+]
 
 [[package]]
 name = "generic-array"
@@ -1963,7 +1984,7 @@ checksum = "2b15c43186be67a4fd63bee50d0303afffcef381492ebe2c5d87f324e1b8815c"
 [[package]]
 name = "reth-chainspec"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-chains",
  "alloy-consensus",
@@ -1983,7 +2004,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -1999,7 +2020,7 @@ dependencies = [
 [[package]]
 name = "reth-codecs-derive"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -2010,7 +2031,7 @@ dependencies = [
 [[package]]
 name = "reth-ethereum-forks"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-chains",
  "alloy-primitives",
@@ -2027,7 +2048,7 @@ dependencies = [
 [[package]]
 name = "reth-network-peers"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-primitives",
  "alloy-rlp",
@@ -2040,7 +2061,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -2070,7 +2091,7 @@ dependencies = [
 [[package]]
 name = "reth-primitives-traits"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-consensus",
  "alloy-eips",
@@ -2090,7 +2111,7 @@ dependencies = [
 [[package]]
 name = "reth-static-file-types"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-primitives",
  "derive_more",
@@ -2101,7 +2122,7 @@ dependencies = [
 [[package]]
 name = "reth-trie-common"
 version = "1.1.1"
-source = "git+https://github.com/lewis1revill/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
+source = "git+https://github.com/lita-xyz/reth.git?branch=1.1.1-delendum#3cd0daa07120e7d6da205d5ee639fb1860175bd2"
 dependencies = [
  "alloy-consensus",
  "alloy-genesis",
@@ -2929,13 +2950,15 @@ checksum = "b6c140620e7ffbb22c2dee59cafe6084a59b5ffc27a8859a5f0d494b5d52b6be"
 [[package]]
 name = "valida-rs"
 version = "0.1.0"
-source = "git+https://github.com/lita-xyz/valida-rs.git?branch=main#66868f53635b4a1a5d962a5eec7473cdcc41ae38"
+source = "git+https://github.com/lita-xyz/valida-rs.git?branch=main#f780cefbb5299fc1f5e505a27b2c6eeb02b67f2f"
 dependencies = [
  "bincode",
+ "gag",
  "getrandom",
  "once_cell",
  "rand",
  "serde",
+ "tempfile",
 ]
 
 [[package]]
@@ -3019,6 +3042,28 @@ name = "wasm-bindgen-shared"
 version = "0.2.95"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "65fc09f10666a9f147042251e0dda9c18f166ff7de300607007e96bdebc1068d"
+
+[[package]]
+name = "winapi"
+version = "0.3.9"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c839a674fcd7a98952e593242ea400abe93992746761e38641405d28b00f419"
+dependencies = [
+ "winapi-i686-pc-windows-gnu",
+ "winapi-x86_64-pc-windows-gnu",
+]
+
+[[package]]
+name = "winapi-i686-pc-windows-gnu"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "ac3b87c63620426dd9b991e5ce0329eff545bccbbb34f3be09ff6fb6ab51b7b6"
+
+[[package]]
+name = "winapi-x86_64-pc-windows-gnu"
+version = "0.4.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "712e227841d057c1ee1cd2fb22fa7e5a5461ae8e48fa2ca79ec42cfc1931183f"
 
 [[package]]
 name = "windows-core"
