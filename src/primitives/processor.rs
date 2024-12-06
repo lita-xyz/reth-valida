@@ -32,7 +32,7 @@ use reth_chainspec::BaseFeeParams;
 use revm::db::AccountState;
 use revm::db::InMemoryDB;
 use revm::interpreter::Host;
-use revm::primitives::{SpecId, TransactTo, TxEnv};
+use revm::primitives::{Authorization, AuthorizationList, SpecId, TransactTo, TxEnv};
 use revm::{Database, DatabaseCommit, Evm};
 use std::mem;
 use std::mem::take;
@@ -163,12 +163,19 @@ where
     /// Processes each transaction and collect receipts and storage changes.
     pub fn execute(&mut self) {
         let gwei_to_wei: U256 = U256::from(1_000_000_000);
-        let spec_id = SpecId::SHANGHAI;
+
+        let spec_id = match self.header.as_ref().unwrap().number {
+            // We only support SHANGHAI and CANCUN. TODO: Better error handling.
+            0..=17034869 => panic!("Unsupported specification for block"),
+            17034870..=19426586 => SpecId::SHANGHAI,
+            _ => SpecId::CANCUN,
+        };
 
         let mut evm = Evm::builder()
             .with_spec_id(spec_id)
             .modify_cfg_env(|cfg_env| {
                 cfg_env.chain_id = 1;
+                cfg_env.disable_balance_check = true;
             })
             .modify_block_env(|blk_env| {
                 blk_env.number = self.header.as_mut().unwrap().number.try_into().unwrap();
@@ -392,8 +399,62 @@ fn fill_eth_tx_env(tx_env: &mut TxEnv, essence: &Transaction, caller: Address) {
                 })
                 .collect();
         }
-        Transaction::Eip4844(_) => todo!(),
-        Transaction::Eip7702(_) => todo!(),
+        Transaction::Eip4844(tx) => {
+            tx_env.caller = caller;
+            tx_env.gas_limit = tx.gas_limit as u64;
+            tx_env.gas_price = U256::from(tx.max_fee_per_gas);
+            tx_env.gas_priority_fee = Some(U256::from(tx.max_priority_fee_per_gas));
+            tx_env.transact_to = TransactTo::Call(tx.to);
+            tx_env.value = tx.value;
+            tx_env.data = tx.input.clone();
+            tx_env.chain_id = Some(tx.chain_id);
+            tx_env.nonce = Some(tx.nonce);
+            tx_env.access_list = tx
+                .access_list
+                .0
+                .iter()
+                .map(|item| {
+                    AccessListItem {
+                        address: item.address,
+                        storage_keys: item.storage_keys.iter().map(|key| (*key).into()).collect(),
+                    }
+                })
+                .collect();
+            tx_env.blob_hashes = tx.blob_versioned_hashes.clone();
+            tx_env.max_fee_per_blob_gas = Some(U256::from(tx.max_fee_per_blob_gas));
+        }
+        Transaction::Eip7702(tx) => {
+            tx_env.caller = caller;
+            tx_env.gas_limit = tx.gas_limit as u64;
+            tx_env.gas_price = U256::from(tx.max_fee_per_gas);
+            tx_env.gas_priority_fee = Some(U256::from(tx.max_priority_fee_per_gas));
+            tx_env.transact_to = TransactTo::Call(tx.to);
+            tx_env.value = tx.value;
+            tx_env.data = tx.input.clone();
+            tx_env.chain_id = Some(tx.chain_id);
+            tx_env.nonce = Some(tx.nonce);
+            tx_env.access_list = tx
+                .access_list
+                .0
+                .iter()
+                .map(|item| {
+                    AccessListItem {
+                        address: item.address,
+                        storage_keys: item.storage_keys.iter().map(|key| (*key).into()).collect(),
+                    }
+                })
+                .collect();
+            // Shenanigans due to revm using a different version of Alloy types than reth.
+            tx_env.authorization_list = Some(AuthorizationList::Signed(tx.authorization_list.iter().map(|item| {
+                let auth = item.inner();
+                let auth = Authorization {
+                    chain_id: U256::from(auth.chain_id),
+                    address: auth.address,
+                    nonce: auth.nonce
+                };
+                auth.into_signed(item.signature().unwrap())
+            }).collect()));
+        }
     };
 }
 

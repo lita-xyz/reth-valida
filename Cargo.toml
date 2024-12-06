@@ -12,7 +12,7 @@ zstd-sys = { git = "https://github.com/lita-xyz/zstd-rs.git", branch = "zstd-sys
 
 [dependencies]
 valida-rs = { git = "https://github.com/lita-xyz/valida-rs.git", branch = "main" }
-revm = { version = "14.0.0", features = ["std"], default-features = false }
+revm = { version = "15.0.0", features = ["std", "optional_balance_check"], default-features = false }
 reth-primitives = { git = "https://github.com/lita-xyz/reth.git", branch = "1.1.1-delendum" }
 reth-chainspec = { git = "https://github.com/lita-xyz/reth.git", branch = "1.1.1-delendum" }
 reth-trie-common = { git = "https://github.com/lita-xyz/reth.git", branch = "1.1.1-delendum" }

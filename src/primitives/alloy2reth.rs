@@ -19,7 +19,7 @@
 //! Common conversions between Alloy and Reth types.
 
 use alloy_rpc_types::Header as AlloyHeader;
-use alloy_consensus::{TxLegacy, TxEip2930, TxEip1559};
+use alloy_consensus::{TxLegacy, TxEip2930, TxEip1559, TxEip4844, TxEip7702};
 use alloy_consensus::Transaction as AlloyTransactionTrait;
 use alloy_primitives::U256;
 use alloy_primitives::Signature as RethSignature;
@@ -80,6 +80,43 @@ impl IntoReth<RethTransaction> for AlloyTransaction {
                         .map(|item| item.clone())
                         .collect(),
                 ),
+            }),
+            3 => Transaction::Eip4844(TxEip4844 {
+                chain_id: self.chain_id().unwrap(),
+                nonce: self.nonce(),
+                max_fee_per_gas: self.max_fee_per_gas(),
+                max_priority_fee_per_gas: self.max_priority_fee_per_gas().unwrap(),
+                gas_limit: self.gas_limit().try_into().unwrap(),
+                to: self.to.unwrap(),
+                value: self.value(),
+                input: self.input().clone(),
+                access_list: AccessList(
+                    self.access_list()
+                        .unwrap()
+                        .iter()
+                        .map(|item| item.clone())
+                        .collect(),
+                ),
+                blob_versioned_hashes: self.blob_versioned_hashes().unwrap().to_vec(),
+                max_fee_per_blob_gas: self.max_fee_per_blob_gas().unwrap(),
+            }),
+            4 => Transaction::Eip7702(TxEip7702 {
+                chain_id: self.chain_id().unwrap(),
+                nonce: self.nonce(),
+                max_fee_per_gas: self.max_fee_per_gas(),
+                max_priority_fee_per_gas: self.max_priority_fee_per_gas().unwrap(),
+                gas_limit: self.gas_limit().try_into().unwrap(),
+                to: self.to.unwrap(),
+                value: self.value(),
+                input: self.input().clone(),
+                access_list: AccessList(
+                    self.access_list()
+                        .unwrap()
+                        .iter()
+                        .map(|item| item.clone())
+                        .collect(),
+                ),
+                authorization_list: self.authorization_list().unwrap().to_vec(),
             }),
             _ => panic!("invalid tx type"),
         };
