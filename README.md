@@ -1,6 +1,6 @@
-This crate is a modified version of [`reth`](https://github.com/paradigmxyz/reth), to be run on the [Valida](https://github.com/lita-xyz/valida-toolchain) zkVM.
+This crate is a modified version of [`reth`](https://github.com/paradigmxyz/reth), to be run on the v0.7.0-alpha version of [Valida](https://github.com/lita-xyz/valida-toolchain) zkVM.
 
-It is to be used in conjunction with [`prepare_block`](https://github.com/marty-ai/prepare_block). It reads a specific serialized block prepared by `prepare_block`, and prove the block on the Ethereum engine, using Valida.
+It is to be used in conjunction with [`prepare_block`](https://github.com/marty-ai/prepare_block). This version is tested to be compatible with `prepare_block` `v0.7.0-alpha`. It reads a specific serialized block prepared by `prepare_block`, and prove the block on the Ethereum engine, using Valida.
 
 ## Compilation
 To compile this to run on the Valida zkVM, make sure you have the [Valida Compiler](https://github.com/lita-xyz/valida-toolchain) installed. Follow its README to install. Make sure there is no error in the compilation process.
