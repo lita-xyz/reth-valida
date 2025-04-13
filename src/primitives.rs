@@ -19,7 +19,7 @@ pub struct ValidaRethInput {
     pub parent_header: Header,
 
     /// The 160-bit address to which all fees collected from the successful mining of this block
-    /// be transferred.
+    /// will be transferred.
     pub beneficiary: Address,
 
     /// A scalar value equal to the current limit of gas expenditure per block.
